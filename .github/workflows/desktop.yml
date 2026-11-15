@@ -1,0 +1,49 @@
+name: Build desktop apps
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            script: build:win
+          - os: macos-latest
+            script: build:mac
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node --check desktop/main.cjs
+      - run: npm run ${{ matrix.script }}
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: desktop-${{ matrix.os }}
+          path: |
+            release/*.exe
+            release/*.dmg
+          if-no-files-found: error
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: downloads
+          merge-multiple: true
+      - name: Publish downloadable apps
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sha256sum downloads/* > downloads/SHA256SUMS.txt
+          gh release create v1.0.0 downloads/* --target "$GITHUB_SHA" --title 'Jags Radio Sync 1.0.0' --notes-file DESKTOP.md

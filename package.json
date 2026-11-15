@@ -1,0 +1,41 @@
+{
+  "name": "jags-radio-sync",
+  "version": "1.0.0",
+  "description": "WHOG radio audio delay for watching Jaguars football",
+  "author": "Ian Miller",
+  "private": true,
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "build:win": "electron-builder --win portable --x64 --publish never",
+    "build:mac": "electron-builder --mac dmg --arm64 --x64 --publish never"
+  },
+  "build": {
+    "appId": "com.ianmiller.jagsradiosync",
+    "productName": "Jags Radio Sync",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "desktop/**",
+      "dist/**",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": "portable",
+      "artifactName": "Jags-Radio-Sync-Windows-${arch}.${ext}"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.sports",
+      "identity": null,
+      "artifactName": "Jags-Radio-Sync-Mac-${arch}.${ext}"
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.3.2",
+    "electron-builder": "^26.18.0"
+  }
+}

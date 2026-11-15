@@ -2,6 +2,10 @@
 
 Listen to WHOG 95.7 with an adjustable audio delay to match the Jaguars radio broadcast to YouTube Sunday Ticket or another TV feed.
 
+## Desktop app — no dependencies for listeners
+
+Download a ready-to-run app from [Releases](https://github.com/miller-ian/jags-radio-sync/releases/latest). See [desktop instructions](DESKTOP.md) for Windows, Mac, and sharing it with family. The app bundles its runtime and does not require Git, Python, Node, or a ChatGPT login.
+
 ## Run locally
 
 Requires Python 3 and a modern browser that supports AudioWorklet (Chrome, Edge, Firefox, or Safari). No npm dependencies or build step are required.
