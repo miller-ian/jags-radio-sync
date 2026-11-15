@@ -28,4 +28,4 @@ You can download the matching EXE or DMG and send that file directly. Your famil
 
 ## Build from source (developers only)
 
-Install Node.js 22 or later, then run `npm ci`. Use `npm start` for development, `npm run build:win` on Windows, or `npm run build:mac` on a Mac. Outputs are in `release/`. The Build desktop apps GitHub Actions workflow builds both platforms and publishes the downloads as a GitHub release.
+Install Node.js 22 or later, then run `npm ci`. Use `npm start` for development, `npm run build:win` on Windows, or `npm run build:mac` on a Mac. Outputs are in `release/`. A sample GitHub Actions workflow is included at `desktop/build-workflow.example.yml`. To enable automated releases, copy it to `.github/workflows/desktop.yml` using a GitHub login with workflow permission. The current release was built locally. Cross-building Windows on macOS also requires `-c.win.signAndEditExecutable=false` to skip Windows executable metadata editing.
