@@ -4,7 +4,7 @@ Download the app for your computer from this release. No Git, Python, Node, brow
 
 ## Windows
 
-Download **Jags-Radio-Sync-Windows-x64.exe** and double-click it. This is a portable app: no installer is needed. Keep the EXE wherever you like and use it again next game. Intended for Windows 10/11 on Intel or AMD PCs.
+Download **Jags-Radio-Sync-Windows-x64.zip**. Right-click it and choose **Extract All**. Open the extracted `win-unpacked` folder and double-click **Jags Radio Sync.exe**. No installer is needed. Keep the whole extracted folder together; the EXE needs the bundled files beside it. Intended for Windows 10/11 on Intel or AMD PCs.
 
 ## Mac
 
@@ -24,8 +24,8 @@ Your delay is remembered on this computer. Closing the app clears the audio buff
 
 ## Sending it to family
 
-You can download the matching EXE or DMG and send that file directly. Your family does not need access to this private GitHub repository. Email services may block large executables, so a trusted file-sharing service or USB drive may be easier. Send the appropriate app file together with these instructions.
+You can download the matching ZIP or DMG and send that file directly. Your family does not need access to this private GitHub repository. Email services may block large executables, so a trusted file-sharing service or USB drive may be easier. Send the appropriate download together with these instructions.
 
 ## Build from source (developers only)
 
-Install Node.js 22 or later, then run `npm ci`. Use `npm start` for development, `npm run build:win` on Windows, or `npm run build:mac` on a Mac. Outputs are in `release/`. A sample GitHub Actions workflow is included at `desktop/build-workflow.example.yml`. To enable automated releases, copy it to `.github/workflows/desktop.yml` using a GitHub login with workflow permission. The current release was built locally. Cross-building Windows on macOS also requires `-c.win.signAndEditExecutable=false` to skip Windows executable metadata editing.
+Install Node.js 22 or later, then run `npm ci`. Use `npm start` for development, `npm run build:win` on Windows, or `npm run build:mac` on a Mac. Outputs are in `release/`. A sample GitHub Actions workflow is included at `desktop/build-workflow.example.yml`. To enable automated releases, copy it to `.github/workflows/desktop.yml` using a GitHub login with workflow permission. The current release was built locally. The Windows release is a ZIP containing the executable and its bundled runtime. To reproduce it on Apple Silicon without Rosetta, run `npx electron-builder --win dir --x64 --publish never -c.win.signAndEditExecutable=false`, then ZIP the `release/win-unpacked` folder. The optional single-file portable target requires a compatible NSIS toolchain.
